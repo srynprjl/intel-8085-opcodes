@@ -1,3 +1,4 @@
+import TableRow from "./components/TableRow";
 import opcodes from "./data/opcodes"
 import { useState } from "react"
 
@@ -15,10 +16,10 @@ function App() {
   }
   const opcode = opcodes.map(data => {
     if (searchParameter == "") {
-      return <>{data.opcode} : {data.mnemonic} <br /></>
+      return <TableRow opcode={data.opcode} mnemonics={data.mnemonic} description={data.description} />
     } else {
       if (data.opcode.includes(searchParameter.toUpperCase()) || data.mnemonic.includes(searchParameter.toUpperCase())) {
-        return <>{data.opcode} : {data.mnemonic} <br /></>
+        return <><TableRow opcode={data.opcode} mnemonics={data.mnemonic} description={data.description} /></>
       }
     }
 
@@ -27,7 +28,14 @@ function App() {
   return (
     <>
       <input type="text" onChange={search} /> <br />
-      {opcode}
+      <table>
+        <tr>
+          <th>Opcode</th>
+          <th>Mnenomics</th>
+          <th>Descriptions</th>
+        </tr>
+        {opcode}
+        </table>
     </>
   )
 }
