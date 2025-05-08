@@ -1,5 +1,5 @@
 import opcodes from "./data/opcodes"
-import {useState} from "react"
+import { useState } from "react"
 
 
 
@@ -9,25 +9,24 @@ function App() {
 
   const [searchParameter, setSearchParameter] = useState("")
 
-const search = (data) => {
-  setSearchParameter(prev => data.target.value);
-  console.log(searchParameter)
-}
-const opcode = opcodes.map(data =>{
-  if(searchParameter == ""){
-    return <>{data.opcode} : {data.mnemonic} <br /></>
-  } else {
-    if(searchParameter == data.opcode || searchParameter == data.mnemonic){
+  const search = (data) => {
+    setSearchParameter(prev => data.target.value);
+    console.log(searchParameter)
+  }
+  const opcode = opcodes.map(data => {
+    if (searchParameter == "") {
       return <>{data.opcode} : {data.mnemonic} <br /></>
+    } else {
+      if (data.opcode.includes(searchParameter.toUpperCase()) || data.mnemonic.includes(searchParameter.toUpperCase())) {
+        return <>{data.opcode} : {data.mnemonic} <br /></>
+      }
     }
-  } 
-  
-})
+
+  })
 
   return (
-    <>  
+    <>
       <input type="text" onChange={search} /> <br />
-
       {opcode}
     </>
   )
